@@ -1,48 +1,48 @@
-# Copy-on-write строка
+# Copy-on-write string
 
-Реализуйте класс `CowString`, реализующий концепцию строки с копированием при изменении.
+Implement a `CowString` class that implements the concept of a copy-on-change string.
 
-Идея copy-on-write заключается в том, что одинаковые строки могут ссылаться на одно и то же
-внутреннее представление, экономя за счет этого память. При изменении строки прозрачно для
-пользователя должна создаться копия внутреннего представления и изменение должно примениться к нему.
+The idea behind copy-on-write is that the same strings can refer to the same
+internal representation, thereby saving memory. When changing the line, it is transparent to
+a copy of the internal view should be created for the user and the change should be applied to it.
 
-## Структура класса
+## Class structure
 
-Конструкторы:
-- от `std::string_view`
-- copy- и move-конструкторы
+Constructors:
+- from `std :: string_view`
+- copy- and move-constructors
 
-Методы и операторы:
-- copy- и move- `operator=`
-- `GetData`, возвращающий указатель на внутренний буффер `char*`
-- `begin`/`end` в константном и не константном варианте (и соответствующие итераторы)
-- `operator[]` и константный метод `At`
-- операторы `+`, `+=`, `==`, `!=` от `CowString` и `std::string_view` в различных комбинациях
-- оператор неявного приведения к `std::string_view`
+Methods and Operators:
+- copy- and move- `operator =`
+- `GetData`, which returns a pointer to the internal` char * `buffer
+- `begin` /` end` in constant and non-constant versions (and corresponding iterators)
+- `operator []` and constant method `At`
+- operators `+`, `+ =`, `==`, `! =` from `CowString` and` std :: string_view` in various combinations
+- operator of implicit casting to `std :: string_view`
 
-Не забудьте про деструктор.
+Don't forget the destructor.
 
-## Реализация
+## Implementation
 
-Потребуется реализовать дополнительный класс - внутреннее представление строки.
-Внутренне представление должно содержать счетчик ссылок.
+You will need to implement an additional class - the internal string representation.
+Internally, the view must contain a reference count.
 
-При создании новой строки создается внутреннее представление со счетчиком ссылок 1.
+When a new line is created, an internal representation with a reference count of 1 is created.
 
-При копировании еще одна строка начинает ссылаться на существующее представление.
-Соответственно, счетчик ссылок инкрементируется.
+When copied, another line starts to reference the existing view.
+Accordingly, the reference count is incremented.
 
-При удалении строки счетчик ссылок в её внутреннем представлении декрементируется.
+When a row is deleted, the reference count in its internal representation is decremented.
 
-Представление должно быть удалено, когда удаляется последняя строка, ссылающаяся на него.
+The view should be removed when the last line referencing it is removed.
 
-При модификации строки, единолично владеющей своим внутренним представлением, создавать
-новое представление не нужно.
+When modifying a row that alone owns its internal representation, create
+no new presentation is needed.
 
-Если потребовалось создать новое представление строки, все существующие итераторы
-остаются валидными и "переключаются" на новое представление.
+If it was necessary to create a new string representation, all existing iterators
+remain valid and "switch" to the new view.
 
-Для того чтобы отслеживать модификацию строки через итератор, оператор разыменования
-неконстантного оператора должен возвращать не `char&`, а специальный прокси-объект, неявно
-приводящийся к `char` с перегруженным оператором присваивания. Аналогичный прием надо применить
-для `operator[]`.
+To track the modification of a string through an iterator, the dereference operator
+non-const operator must return not `char &`, but a special proxy object, implicitly
+cast to `char` with an overloaded assignment operator. A similar technique should be applied
+for `operator []`.
