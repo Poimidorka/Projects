@@ -1,38 +1,38 @@
 # HashTable
 
-Реализуйте шаблонный класс `HashTable`, аналогичный `std::unordered_map`.
+Implement a templated `HashTable` class similar to` std :: unordered_map`.
 
-Полностью повторять интерфейс `std::unordered_map` не требуется, реализуйте только необходимые элементы.
+It is not necessary to completely repeat the `std :: unordered_map` interface, implement only the necessary elements.
 
-Шаблонные параметры класса:
-- `K` - тип ключа
-- `V` - тип значения
-- `Hash` - тип, описывающий хэш-функцию, по умолчанию `std::hash<K>`
-- `KeyEqual` - тип, описывающий функцию сравнения ключей, по умолчанию `std::equal_to<K>`
+Template class parameters:
+- `K` - key type
+- `V` - value type
+- `Hash` - a type describing a hash function, by default` std :: hash <K> `
+- `KeyEqual` - a type describing the key comparison function, by default` std :: equal_to <K> `
 
-Конструкторы:
-- по умолчанию
-- от коллекции `std::pair<K, V>` (шаблонный)
-- `copy` и `move`
+Constructors:
+- default
+- from collection `std :: pair <K, V>` (templated)
+- `copy` and` move`
 
-Методы:
-- `copy` и `move` операторы `=`
+Methods:
+- `copy` and` move` operators `=`
 - `[]`, `at`
 - `find`
-- `begin`/`end`
-- `empty`, `size`
+- `begin` /` end`
+- `empty`,` size`
 - `clear`
-- `insert` - в варианте, принимающем `const std::pair<K, V>&`
+- `insert` - in a variant that accepts` const std :: pair <K, V> & `
 - `emplace`
 
-Вспомогательные классы:
-- константный и неконстантный итератор
+Helper classes:
+- constant and non-constant iterator
 
-## Реализация
+## Implementation
 
-Идеи реализации хранения значений, разрешения коллизий и перехэширования можно взять
-[из статьи в Википедии](https://en.wikipedia.org/wiki/Hash_table).
+Ideas for implementing value storage, collision resolution and hashing can be taken from
+[from Wikipedia article] (https://en.wikipedia.org/wiki/Hash_table).
 
-Сделайте константные и неконстантные варианты методов, где это применимо.
+Make constant and non-constant variants of methods where applicable.
 
-Использовать стандартные ассоциативные контейнеры запрещено.
+The use of standard associative containers is prohibited.
