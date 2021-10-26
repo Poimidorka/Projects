@@ -1,0 +1,10 @@
+add_catch(test_robot
+    checkers_topology.cpp
+    field.cpp
+    knight_topology.cpp
+    l1_topology.cpp
+    overflow_topology.cpp
+    planar_topology.cpp
+    robot.cpp
+    test.cpp
+)
