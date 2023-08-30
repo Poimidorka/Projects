@@ -1,8 +1,8 @@
 # Archiver
 
-In this task, you will implement an archiver using the [Huffman algorithm] (https://en.wikipedia.org/wiki/Huffman_coding).
+Implemention of an archiver using the [Huffman algorithm] (https://en.wikipedia.org/wiki/Huffman_coding).
 
-The archiver program must have the following command line interface:
+The archiver program have the following command line interface:
 * `archiver -c archive_name file1 [file2 ...]` - archive files `fil1, file2, ...` and save the result to file `archive_name`.
 * `archiver -d archive_name` - unzip files from the archive` archive_name` and put them in the current directory. File names must be preserved when zipping and unzipping.
 * `archiver -h` - display help on using the program.
@@ -45,34 +45,3 @@ The archive file must have the following format:
 1. The encoded content of the file
 1. If there are more files in the archive, then the encoded service symbol `ONE_MORE_FILE` and the encoding continues from item 1.
 1. The encoded service symbol `ARCHIVE_END`.
-
-## Implementation
-Try to make all the components of the program as possible
-and more universal and not tied to the specifics of a specific task.
-For example, encoding and decoding algorithms should work with I / O streams, not files.
-
-The program must correctly process very large (many times larger than the RAM) files. This means that when the program is running, data should not accumulate in memory.
-
-Files with a format that does not correspond to the specification should not lead to a crash of the program. All exceptions must be correctly handled with a user-understandable error message.
-
-You will most likely need the following components:
-- Wrappers over I / O streams that allow reading and writing values ​​of 1 and 9 bits.
-- Bor with an interface that allows you to conveniently bypass it.
-- Priority queue.
-
-It is recommended to discuss the detailed design of the program with the teacher at the seminars.
-
-## Submission and Grading
-
-The project is checked by teachers without using an automatic verification system. All submissions will go through a code review.
-
-You have to write the entire program from scratch, including the `CMakeLists.txt` files.
-
-Unlike usual homework, the project must be committed / pushed to the repository manually, without using the `submit.py` script.
-
-To submit a project, you need to create a new branch `projects / archiver` (it is executed once, when re-submitting the code, you do not need to create a branch):
-`git checkout -b projects / archiver`
-
-To commit changes to a branch, use the `git add` and` git commit` commands. To push changes to the remote repository, run the command `git push student projects / archiver`. Try to write meaningful commit notes.
-
-After uploading the code to the remote repository, create a merge request in it from the `projects / archiver` branch in` main` and set your teacher as the reviewer.
